@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  reverseproxy:
+        image: reverseproxy
+        ports: ["80:80"]
+        restart: always
+
+  concourse-db:
+    image: postgres
+    environment:
+    - POSTGRES_DB=concourse
+    - POSTGRES_PASSWORD
+    - POSTGRES_USER
+    - PGDATA=/database
+
+  concourse-web:
+    image: concourse/concourse
+    command: web
+    links: [concourse-db]
+    depends_on: [concourse-db, reverseproxy]
+    volumes: ["./keys/web:/concourse-keys"]
+    environment:
+    - CONCOURSE_POSTGRES_HOST=concourse-db
+    - CONCOURSE_POSTGRES_USER
+    - CONCOURSE_POSTGRES_PASSWORD
+    - CONCOURSE_POSTGRES_DATABASE=concourse
+    - CONCOURSE_EXTERNAL_URL
+    - CONCOURSE_ADD_LOCAL_USER
+    - CONCOURSE_MAIN_TEAM_LOCAL_USER
+
+  concourse-worker:
+    image: concourse/concourse
+    command: worker
+    privileged: true
+    links: [concourse-web]
+    depends_on: [concourse-web]
+    volumes: ["./keys/worker:/concourse-keys"]
+    environment:
+    - CONCOURSE_TSA_HOST=concourse-web:2222
+    - CONCOURSE_GARDEN_NETWORK
