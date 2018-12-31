@@ -6,6 +6,10 @@ sudo apt-get -y install \
     curl \
     software-properties-common
 
+#SSH KEY
+
+yes | ssh-keygen -f id_rsa -t rsa -N ''
+
 #CERTBOT
 
 sudo add-apt-repository -y ppa:certbot/certbot
