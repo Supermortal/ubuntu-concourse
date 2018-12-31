@@ -8,10 +8,10 @@ sudo apt-get -y install \
     jq
 
 sudo add-apt-repository -y ppa:certbot/certbot
-sudo add-apt-repository -y \   
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
 
 sudo apt-get -y update
