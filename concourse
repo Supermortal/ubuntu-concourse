@@ -1,6 +1,6 @@
 
 upstream docker-concourse {
-    server http://localhost:8080;
+    server localhost:8080;
 }
 
 server {
