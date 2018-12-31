@@ -51,7 +51,14 @@ sudo apt -y install docker-compose
 
 #CONCOURSE:
 
-sudo docker rm --force $(sudo docker ps -aq)
+while [ "$1" != "" ]; do
+    case $1 in
+        -cc | --clear-containers )
+            sudo docker rm --force $(sudo docker ps -aq)
+            ;;
+    esac
+    shift
+done
 ./generate-keys.sh
 sudo docker-compose up -d
 
