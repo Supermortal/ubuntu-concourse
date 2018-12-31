@@ -1,3 +1,11 @@
+sudo apt-get -y update
+
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
 #CERTBOT
 
 sudo add-apt-repository -y ppa:certbot/certbot
@@ -14,12 +22,6 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
 #DOCKER:
-
-sudo apt-get -y install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
