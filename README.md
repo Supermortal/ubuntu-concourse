@@ -24,6 +24,6 @@
 
 ## Run init.sh
 
-* Run `./init.sh`
+* Run `. ./init.sh` (the extra dot is to preserve the $PRIVATE_KEY variable)
 * This command should add all the dependecies your need, including the fly CLI
 * Your Concourse instance should now be available at your desired host at port 80

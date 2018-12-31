@@ -8,7 +8,15 @@ sudo apt-get -y install \
 
 #SSH KEY
 
-yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
+while [ "$1" != "" ]; do
+    case $1 in
+        -gk | --generate-key )
+            yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
+            ;;
+    esac
+    shift
+done
+
 export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
 
 #CERTBOT
