@@ -9,6 +9,7 @@ sudo apt-get -y install \
 #SSH KEY
 
 yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
+export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
 
 #CERTBOT
 
