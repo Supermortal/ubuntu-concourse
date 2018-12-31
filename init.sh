@@ -1,6 +1,11 @@
+#CERTBOT
+
+sudo add-apt-repository -y ppa:certbot/certbot
+sudo apt-get -y update
+sudo apt-get install -y python-certbot-nginx
+
 #NGINX
 
-sudo apt-get -y update
 sudo apt-get install -y nginx
 sudo cp concourse /etc/nginx/sites-available/concourse
 sudo ln -s /etc/nginx/sites-available/concourse /etc/nginx/sites-enabled/concourse
