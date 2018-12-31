@@ -4,7 +4,8 @@ sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common
+    software-properties-common \
+    jq
 
 sudo add-apt-repository -y ppa:certbot/certbot
 sudo add-apt-repository -y \   

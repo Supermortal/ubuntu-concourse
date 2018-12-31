@@ -8,5 +8,5 @@ sudo docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r su
 
 # remove unused volumes:
 sudo find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf <(
-  sudo docker ps -aq | xargs sudo docker inspect | jq -r '.[] | .Mounts | .[] | .Name | select(.)'
+  sudo docker ps -aq | xargs sudo docker inspect | sudo jq -r '.[] | .Mounts | .[] | .Name | select(.)'
 ) | xargs -r sudo rm -fr
