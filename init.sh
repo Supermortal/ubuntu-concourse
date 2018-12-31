@@ -8,7 +8,7 @@ sudo apt-get -y install \
 
 #SSH KEY
 
-yes | ssh-keygen -f id_rsa -t rsa -N ''
+yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
 
 #CERTBOT
 
