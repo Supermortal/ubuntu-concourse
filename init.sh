@@ -55,7 +55,7 @@ sudo apt-get -y install docker-compose
 while [ "$1" != "" ]; do
     case $1 in
         -cc | --clear-containers )
-            sudo docker rm --force $(sudo docker ps -aq)
+            sudo docker rm -v --force $(sudo docker ps -aq)
             ;;
     esac
     shift
