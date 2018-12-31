@@ -16,19 +16,6 @@ sudo add-apt-repository \
 
 sudo apt-get -y update
 
-#SSH KEY
-
-while [ "$1" != "" ]; do
-    case $1 in
-        -gk | --generate-key )
-            yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
-            ;;
-    esac
-    shift
-done
-
-export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
-
 #CERTBOT
 
 sudo apt-get install -y python-certbot-nginx
@@ -60,9 +47,16 @@ while [ "$1" != "" ]; do
             sudo docker rmi --force $(sudo docker images -q)
             ./cleanup-docker.sh
             ;;
+        #SSH KEY
+        -gk | --generate-key )
+            yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
+            ;;
     esac
     shift
 done
+
+export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
+
 ./generate-keys.sh
 sudo docker-compose up -d
 
