@@ -45,7 +45,6 @@ while [ "$1" != "" ]; do
         -cc | --clear-containers )
             sudo docker rm -v --force $(sudo docker ps -aq)
             sudo docker rmi --force $(sudo docker images -q)
-            ./cleanup-docker.sh
             ;;
         #SSH KEY
         -gk | --generate-key )
