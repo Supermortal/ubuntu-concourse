@@ -1,13 +1,6 @@
 version: '2'
 
 services:
-  reverseproxy:
-        image: reverseproxy
-        ports: ["80:80"]
-        restart: always
-        volumes:
-        - ./letsencrypt-site:/usr/share/nginx/html
-
   concourse-db:
     image: postgres
     environment:
@@ -20,7 +13,8 @@ services:
     image: concourse/concourse
     command: web
     links: [concourse-db]
-    depends_on: [concourse-db, reverseproxy]
+    depends_on: [concourse-db]
+    ports: ["8080:8080"]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
     - CONCOURSE_POSTGRES_HOST=concourse-db

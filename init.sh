@@ -1,3 +1,13 @@
+#NGINX
+
+sudo apt-get -y update
+sudo apt-get install -y nginx
+sudo cp concourse.conf /etc/nginx/sites-available/concourse.conf
+sudo ln -s /etc/nginx/sites-available/concourse.conf /etc/nginx/sites-enabled/concourse.conf
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+sudo service nginx restart
+
 #DOCKER:
 
 sudo apt-get -y update
@@ -25,6 +35,7 @@ sudo docker build -t reverseproxy .
 
 #CONCOURSE:
 
+sudo docker rm --force $(sudo docker ps -aq)
 ./generate-keys.sh
 sudo docker-compose up -d
 
