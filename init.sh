@@ -2,8 +2,8 @@
 
 sudo apt-get -y update
 sudo apt-get install -y nginx
-sudo cp concourse.conf /etc/nginx/sites-available/concourse.conf
-sudo ln -s /etc/nginx/sites-available/concourse.conf /etc/nginx/sites-enabled/concourse.conf
+sudo cp concourse /etc/nginx/sites-available/concourse
+sudo ln -s /etc/nginx/sites-available/concourse /etc/nginx/sites-enabled/concourse
 sudo rm /etc/nginx/sites-available/default
 sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
