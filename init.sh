@@ -10,8 +10,6 @@ sudo service nginx restart
 
 #DOCKER:
 
-sudo apt-get -y update
-
 sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
@@ -30,8 +28,6 @@ sudo add-apt-repository \
 sudo apt-get -y update
 sudo apt-get -y install docker-ce
 sudo apt -y install docker-compose
-
-sudo docker build -t reverseproxy .
 
 #CONCOURSE:
 
