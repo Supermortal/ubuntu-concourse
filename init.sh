@@ -57,7 +57,7 @@ while [ "$1" != "" ]; do
     case $1 in
         -cc | --clear-containers )
             sudo docker rm -v --force $(sudo docker ps -aq)
-            sudo docker rmi $(sudo docker images -q)
+            sudo docker rmi --force $(sudo docker images -q)
             ./cleanup-docker.sh
             ;;
     esac
