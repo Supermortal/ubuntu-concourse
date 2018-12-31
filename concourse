@@ -1,0 +1,29 @@
+
+upstream docker-concourse {
+    server http://localhost:8080;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        proxy_pass         http://docker-concourse;
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Host $server_name;
+    }
+
+    location ~ /.well-known {
+        allow all;
+    }
+
+    location ~ /.well-known/acme-challenge {
+        allow all;
+        root /usr/share/nginx/html;
+    }
+
+    root /usr/share/nginx/html;
+}
