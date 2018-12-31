@@ -1,5 +1,3 @@
-#DOCKER:
-
 sudo apt-get -y update
 
 sudo apt-get -y install \
@@ -7,6 +5,36 @@ sudo apt-get -y install \
     ca-certificates \
     curl \
     software-properties-common
+
+#SSH KEY
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -gk | --generate-key )
+            yes | ssh-keygen -b 4096 -f id_rsa -t rsa -N ''
+            ;;
+    esac
+    shift
+done
+
+export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
+
+#CERTBOT
+
+sudo add-apt-repository -y ppa:certbot/certbot
+sudo apt-get -y update
+sudo apt-get install -y python-certbot-nginx
+
+#NGINX
+
+sudo apt-get install -y nginx
+sudo cp concourse /etc/nginx/sites-available/concourse
+sudo ln -s /etc/nginx/sites-available/concourse /etc/nginx/sites-enabled/concourse
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+sudo service nginx restart
+
+#DOCKER:
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -21,10 +49,16 @@ sudo apt-get -y update
 sudo apt-get -y install docker-ce
 sudo apt -y install docker-compose
 
-sudo docker build -t reverseproxy .
-
 #CONCOURSE:
 
+while [ "$1" != "" ]; do
+    case $1 in
+        -cc | --clear-containers )
+            sudo docker rm --force $(sudo docker ps -aq)
+            ;;
+    esac
+    shift
+done
 ./generate-keys.sh
 sudo docker-compose up -d
 
