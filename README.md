@@ -24,6 +24,7 @@
 
 ## Run init.sh
 
-* Run `. ./init.sh` (the extra dot is to preserve the $PRIVATE_KEY variable)
+* Run `. ./init.sh --generate-key` (the extra dot is to preserve the $PRIVATE_KEY variable)
+* Or run `. ./init.sh` to skip generating a key and reuse the current id_rsa file/key
 * This command should add all the dependecies your need, including the fly CLI
 * Your Concourse instance should now be available at your desired host at port 80
