@@ -5,6 +5,8 @@ services:
         image: reverseproxy
         ports: ["80:80"]
         restart: always
+        volumes:
+        - ./letsencrypt-site:/usr/share/nginx/html
 
   concourse-db:
     image: postgres
