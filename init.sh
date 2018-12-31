@@ -6,8 +6,8 @@ sudo apt-get -y install \
     curl \
     software-properties-common
 
-sudo add-apt-repository -y \
-    ppa:certbot/certbot \
+sudo add-apt-repository -y ppa:certbot/certbot
+sudo add-apt-repository -y \   
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) \
     stable"
