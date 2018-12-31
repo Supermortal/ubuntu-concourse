@@ -6,6 +6,15 @@ sudo apt-get -y install \
     curl \
     software-properties-common
 
+sudo add-apt-repository -y \
+    ppa:certbot/certbot \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+
+
+sudo apt-get -y update
+
 #SSH KEY
 
 while [ "$1" != "" ]; do
@@ -21,8 +30,6 @@ export PRIVATE_KEY=`cat /home/concourse/ubuntu-concourse/id_rsa`
 
 #CERTBOT
 
-sudo add-apt-repository -y ppa:certbot/certbot
-sudo apt-get -y update
 sudo apt-get install -y python-certbot-nginx
 
 #NGINX
@@ -40,14 +47,8 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo apt-key fingerprint 0EBFCD88
 
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-sudo apt-get -y update
 sudo apt-get -y install docker-ce
-sudo apt -y install docker-compose
+sudo apt-get -y install docker-compose
 
 #CONCOURSE:
 
@@ -66,7 +67,7 @@ sudo docker-compose up -d
 
 echo "Waiting on Concourse server"
 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:80/api/v1/cli?arch=amd64&platform=linux)" != "400" ]]; do sleep 1; printf "%c" "."; done'
-curl "http://127.0.0.1:80/api/v1/cli?arch=amd64&platform=linux" --output fly
+wget "http://127.0.0.1:80/api/v1/cli?arch=amd64&platform=linux"
 
 sudo mkdir -p /usr/local/bin
 sudo cp fly /usr/local/bin
