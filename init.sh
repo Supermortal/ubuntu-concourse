@@ -16,7 +16,6 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-
 sudo apt-get -y update
 
 #CERTBOT
